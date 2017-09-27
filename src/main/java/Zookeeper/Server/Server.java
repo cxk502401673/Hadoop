@@ -10,6 +10,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class Server {
         private String connectString="192.168.0.10,192.168.0.11,192.168.0.12";
+        //private String connectString="123.206.213.12:2183,123.206.213.12:2182,123.206.213.12:2181";
         private Integer sessionTimeout=6000;
         ZooKeeper zooKeeper=null;
         private static CountDownLatch countDownLatch=new CountDownLatch(1);
@@ -34,7 +35,7 @@ public class Server {
                 if(stat==null){
                     zooKeeper.create(root,"Hosts".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
                 }
-            zooKeeper.create(path,"hello".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);//EPHEMERAL 临时节点
+            zooKeeper.create(path,("hello,"+hostName).getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);//EPHEMERAL 临时节点
         } catch ( Exception e) {
             e.printStackTrace();
         }
