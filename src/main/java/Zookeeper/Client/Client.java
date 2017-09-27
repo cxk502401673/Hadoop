@@ -13,6 +13,16 @@ public class Client {
     ZooKeeper zooKeeper=null;
     private String root="/Hosts";
 
+    public static void main(String[] args) {
+        Client client=new Client();
+        try {
+            client.getConnect();
+            client.handleBussiness();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     public void getConnect() throws  Exception{
@@ -29,7 +39,7 @@ public class Client {
 
 
     private void getServerList() throws  Exception{
-       List<String> childrenList= zooKeeper.getChildren(root,false);
+       List<String> childrenList= zooKeeper.getChildren(root,true);
         for(String s:childrenList){
             System.out.println(s);
         }
